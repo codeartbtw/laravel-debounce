@@ -2,6 +2,7 @@
 
 namespace Zackaj\LaravelDebounce\Commands;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Console\JobMakeCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 
@@ -14,6 +15,19 @@ class DebounceJobMakeCommand extends JobMakeCommand
      * @var string
      */
     protected $name = 'make:debounce-job';
+
+    /**
+     * Create a new command instance.
+     *
+     * Laravel 12+ parent commands define a `$signature` which takes precedence over
+     * `$name`, so the name must be set explicitly after construction.
+     */
+    public function __construct(Filesystem $files)
+    {
+        parent::__construct($files);
+
+        $this->setName('make:debounce-job');
+    }
 
     /**
      * The console command description.
